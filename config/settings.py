@@ -26,8 +26,23 @@ SECRET_KEY = 'django-insecure-m9(#hh3qe&if@z2yctrimhgwp92c+^073dpto^n&3_x3o(z*jj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+# Productionda:
+ALLOWED_HOSTS = [
+    "sunnotes.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
+# Django 4+ da sxema bilan yozish shart!
+CSRF_TRUSTED_ORIGINS = [
+    "https://sunnotes.onrender.com",
+    "https://*.onrender.com",
+]
+
+# Cookie va HTTPS bilan ishlash uchun xavfsizlik sozlamalari
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Application definition
 
