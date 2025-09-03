@@ -8,7 +8,7 @@ from .models import Article
 
 # Create your views here.
 
-class ArticleListView(ListView):
+class ArticleListView(LoginRequiredMixin,ListView):
   model = Article
   template_name = 'article_list.html'
 

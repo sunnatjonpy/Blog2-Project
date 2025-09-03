@@ -10,7 +10,8 @@
     {{ form|crispy }}
 
     <button type="submit" class="btn btn-outline-primary">Kirish</button>
-    <a  class="btn btn-outline-warning" href="{% url 'password_reset' %}" role="button" type="submit">Parolni tiklash</a>
+    <!-- <a  class="btn btn-outline-warning" href="{% url 'password_reset' %}" role="button" type="submit">Parolni tiklash</a> -->
+    <a  class="btn btn-outline-success"  href="{% url 'signup' %}" role="button">Ro'yxatdan o'tish</a>
   </form>
 {% endblock content %}
    

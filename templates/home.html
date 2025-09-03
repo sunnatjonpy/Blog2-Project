@@ -5,13 +5,17 @@
 
 {% block content %}
     <br/>
-    <div class="jumbotron">
-        <h1 class="display-4">Assalom alaykum!</h1>
-        <p class="lead">Sunnatjon Arslonovning shaxsiy blogiga xush kelibsiz.</p>
-        <hr class="my-4">
-        <p>Bu yerda siz dasturlash va dasturchilarga oid so'nggi yangiliklardan xabardor bo'lib turasiz.</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">Postlarni ko'rish</a>
-        </p>
-    </div>
+    <header class="bg-light py-5 text-center shadow-sm">
+        <div class="container">
+          <h1 class="display-4 fw-bold text-primary">Assalomu alaykum!</h1>
+          <p class="lead text-muted">
+            Sunnatjon Arslonovning shaxsiy blogiga xush kelibsiz.
+          </p>
+          <p class="mb-4">
+            Bu yerda siz qiziqarli real-hayotdan olingan, manfaatli maqolalarni o'qish imkoniga ega bo'lasiz!
+          </p>
+          <a href="{% url 'article_list' %}" class="btn btn-lg btn-primary shadow">📖 Postlarni ko‘rish</a>
+        </div>
+    </header>
+      
 {% endblock content %}
