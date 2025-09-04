@@ -11,12 +11,6 @@
       <div class="card h-100 shadow-sm">
         {% if article.photo %}
           <a href="{% url 'article_detail' article.pk %}">
-            <img
-              class="card-img-top img-fluid"
-              src="{{ article.photo.url }}"
-              alt="{{ article.title }}"
-              style="height:220px; object-fit:cover;"
-            />
           </a>
         {% endif %}
 
@@ -34,7 +28,7 @@
           </p>
 
           <div class="mt-auto small text-muted">
-            muallif {{ article.author|title }} &middot; {{ article.date }}
+            muallif: {{ article.author|title }} &middot; {{ article.date }}
           </div>
         </div>
       </div>

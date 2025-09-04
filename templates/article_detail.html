@@ -1,32 +1,82 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="card" >
-          <div class="card-body">
-              {%  if object.photo %}
-                <img class="card-img-top" src="{{ object.photo.url }}" alt="{{ object.title }}">
-              {% endif %}
-              <h1 class="card-title">{{ object.title }}</h1>
-              <h6 class="card-subtitle mb-2 text-muted">Muallif: {{ object.author }} | {{ object.date }}</h6>
-              <p class="card-text">{{ object.body | safe}}</p>
-              <a href="{% url 'article_edit' article.pk %}">Tahrirlash</a> |
-              <a href="{% url 'article_delete' article.pk %}">O'chirish</a> |
-              <a href="{% url 'article_list' %}">Barcha postlar</a>
-          </div>
-            <div class="card">
-                <div class="card-header">Izohlar</div>
-                {%  for comment in article.comments.all %}
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>{{ comment }}</p>
-                            <footer class="blockquote-footer">{{ comment.author }}</footer>
-                        </blockquote>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-        <p></p>
+<div class="reading-wrap container py-4">
+  <!-- Reading progress -->
+  <div id="read-progress"></div>
+
+  <article class="article">
+    <!-- Cover image -->
+    {% if object.photo %}
+    <figure class="article-cover">
+      <img src="{{ object.photo.url }}" alt="{{ object.title }}">
+    </figure>
+    {% endif %}
+
+    <!-- Title + meta -->
+    <header class="article-head">
+      <h1 class="title">{{ object.title }}</h1>
+      <div class="meta">
+        <span class="meta-pill">Muallif: {{ object.author|title }}</span>
+        <span class="dot">•</span>
+        <time class="meta-pill">{{ object.date }}</time>
+      </div>
+    </header>
+
+    <!-- Body -->
+    <div class="prose">
+      {{ object.body|safe }}
     </div>
+
+    <!-- Quick actions -->
+    <div class="actions">
+        <a class="btn btn-sm btn-outline-primary" href="{% url 'article_edit' object.pk %}">Tahrirlash</a>
+        <a class="btn btn-sm btn-outline-danger" href="{% url 'article_delete' object.pk %}">O‘chirish</a>
+        <a class="btn btn-sm btn-primary" href="{% url 'article_list' %}">Barcha postlar</a>
+    </div>
+  
+
+    <!-- Share (oddiy) -->
+    <div class="share">
+      <span>Ulashish:</span>
+      <a class="share-link" target="_blank"
+         href="https://t.me/share/url?url={{ request.build_absolute_uri }}&text={{ object.title }}">Telegram</a>
+    </div>
+  </article>
+
+  <!-- Comments -->
+  <section class="comments card mt-4">
+    <div class="card-header">Izohlar</div>
+    {% if object.comments.all %}
+      <ul class="list-group list-group-flush">
+        {% for comment in object.comments.all %}
+          <li class="list-group-item">
+            <blockquote class="mb-0">
+              <p class="mb-1">{{ comment }}</p>
+              <footer class="text-muted">— {{ comment.author }}</footer>
+            </blockquote>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="card-body text-muted">Hozircha izohlar yo‘q.</div>
+    {% endif %}
+  </section>
+</div>
+
+<!-- Tiny script for reading progress -->
+<script>
+  (function () {
+    const bar = document.getElementById('read-progress');
+    const art = document.querySelector('.article');
+    function onScroll() {
+      if (!art) return;
+      const h = art.scrollHeight - window.innerHeight;
+      const y = Math.max(0, Math.min(1, window.scrollY / (h || 1)));
+      bar.style.transform = `scaleX(${y})`;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
 {% endblock content %}
