@@ -11,3 +11,48 @@
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* Styles for mobile responsiveness */
+@media (max-width: 768px) {
+  .meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .meta-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .actions a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .share {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Mobile-friendly typography */
+  .article-head h1 {
+    font-size: 1.8rem;
+    line-height: 1.4;
+  }
+
+  .prose {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
